@@ -25,7 +25,7 @@ public class UserService {
 	}
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
 	public Users getUser(@PathVariable long id){
-		return userrepo.getOne(new Long(id));
+		return  userrepo.getOne(new Long(id));
 	}
 
 	/*
