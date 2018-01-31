@@ -37,11 +37,11 @@ public class ConnexionService {
 
 		Users user=  userrepo.getByUserNameandPassword(username, password);
 		if(user != null){
-			if(!tokens.containsKey(user.getName())){
-				tokens.put(user.getName(), generatetoken());
+			if(!tokens.containsKey(user.getUsername())){
+				tokens.put(user.getUsername(), generatetoken());
 			}	
 		}
-		return tokens.get(user.getName());
+		return tokens.get(user.getUsername());
 	}
 	
 	@RequestMapping(value="/isauth",method = RequestMethod.POST)
@@ -49,7 +49,7 @@ public class ConnexionService {
 		Users user=  userrepo.getByUserName(username);
 		
 		if(user != null){
-			if(tokens.get(user.getName()).equals(token)){
+			if(tokens.get(user.getUsername()).equals(token)){
 				return true;
 			}
 		}
@@ -61,8 +61,8 @@ public class ConnexionService {
 
 		Users user=  userrepo.getByUserName(username);
 		if(user != null){
-			if(tokens.get(user.getName()).equals(token)){
-				tokens.remove(user.getName());
+			if(tokens.get(user.getUsername()).equals(token)){
+				tokens.remove(user.getUsername());
 				return true;
 			}
 		}

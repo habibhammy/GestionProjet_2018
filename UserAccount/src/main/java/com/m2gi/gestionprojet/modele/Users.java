@@ -4,7 +4,9 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.*;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 public class Users {
 	
@@ -12,23 +14,28 @@ public class Users {
 	@Column(name="id")
 	private long id;
 	
-	@Column
+	@Column(name="username")
+	@JsonProperty(value = "username")
     private String username;
 	
-	
-	@Column
+	@Column(name="passwords")
+	@JsonIgnore
     private String passwords;
 
-	@Column
+	@Column(name="email")
+	@JsonProperty(value = "email")
 	private String email;
 	
-	@Column
+	@Column(name="firstname")
+	@JsonProperty(value = "firstname")
 	private String firstname;
 	
-	@Column
+	@Column(name="lastname")
+	@JsonProperty(value = "lastname")
 	private String lastname;
 	
-	@Column
+	@Column(name="country")
+	@JsonProperty(value = "country")
 	private String country;
  
     public Users() {
@@ -52,19 +59,55 @@ public class Users {
         return id;
     }
  
-    public String getName() {
+    public String getUsername() {
         return this.username;
     }
  
-    public void setName(String name) {
-        this.username = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    @Override
+    public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	@Override
     public String toString() {
         return "User{" +
                 "id=" + this.id +
                 ", username='" + this.username + '\'' +
+                ", email='" + this.email + '\'' +
+                ", firstname='" + this.firstname + '\'' +
+                ", lastname='" + this.lastname + '\'' +
+                ", country='" + this.country + '\'' +
                 '}';
     }
 }
