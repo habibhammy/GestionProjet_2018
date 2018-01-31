@@ -19,12 +19,15 @@ public class UserService {
 	 * Get Methods
 	 */
 	@RequestMapping(value="/",method = RequestMethod.GET)
+	@ResponseBody
 	public List<Users> getAllUsers(){
-		//System.out.println("gestallusers() ==> "+userrepo.findAll().toString());
+		System.out.println("gestallusers() ==> "+userrepo.findAll().toString());
 		return userrepo.findAll();
 	}
-	@RequestMapping(value="/{id}",method = RequestMethod.GET)
+	@RequestMapping(value="/{id}",method = RequestMethod.GET,produces={"application/json"})
+	@ResponseBody
 	public Users getUser(@PathVariable long id){
+		System.out.println("user="+userrepo.getOne(new Long(id)));
 		return  userrepo.getOne(new Long(id));
 	}
 
