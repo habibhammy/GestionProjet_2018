@@ -39,12 +39,12 @@ Ce projet est un service web. il peut être requetté par d'autres applications 
     
 ```json
 {
-           "id": 100,
-          "username": "alice",
-          "email": "alice@exemple.com",
-          "firstname": "alice",
-          "lastname": "alice",
-          "country": "FRANCE"
+  "id": 100,
+  "username": "alice",
+  "email": "alice@exemple.com",
+  "firstname": "alice",
+  "lastname": "alice",
+  "country": "FRANCE"
 }
 ```
    
@@ -102,7 +102,10 @@ Ce projet est un service web. il peut être requetté par d'autres applications 
    Elle renvoie ***'TRUE'*** ou ***'FALSE'*** .
     
 #### 3-2 Le model :
+Le model utilisé dans ce projet est constitué de la classe **USERS**.
+```java
 
+```
 #### 3-3 Les services:
 
 #### 3-4 La base de données:
