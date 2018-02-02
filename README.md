@@ -137,4 +137,22 @@ public class Users {
 ```
 #### 3-3 Les services:
 
+Dans ce projet deux services différents coexistent pour gérer les différentes requêtes décrites.
+
+Le service **UserService**
+```java
+
+```
+
+
+Le service **ConnexionService**
+```java
+
+```
 #### 3-4 La base de données:
+La base de données a été géré par le moteur de base de données H2. Les fichiers ***schema.sql*** et ***data.sql*** permettent d'initialiser la base de données à chaque déployement.
+
+La classe ***UserRepository*** représente l'interface DAO responsable de la connexion à la base de données.
+```java
+
+```
