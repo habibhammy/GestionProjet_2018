@@ -17,18 +17,18 @@ Pour le bon fonctionnement de cette API, les programmes suivants sont nécéssai
   * H2 database 1.4.196
   * Tomcat 8.5.14
    * IDE (Eclipse)
-   * Mavean 3.5.2
+   * Maven 3.5.2
     
 #### 2-2 Démarage:
-Pour executer ce projet, suivez les instructions suivante :
+Pour exécuter ce projet, suivez les instructions suivantes :
 
-1- Dans Eclipse faite { [RightClick]>Maven>Update Porject } puis { OK } dans l'ongletr qui s'ouvrira. Cela permettra d'importer tout les dépendence du projet.
+1. Dans Eclipse faite *{ [RightClick]>Maven>Update Porject }* puis *{ OK }* dans l'onglet qui s'ouvrira. Cela permettra d'importer toutes les dépendences du projet.
 
-2- Puis faite { [RightClick]>Run As>Spring Boot App } pour lancer le service.
+2. Puis faite *{ [RightClick]>Run As>Spring Boot App }* pour lancer le service.
  
 ### 3 - Descriptif Technique :
 #### 3-1 Les routes :
-Ce projet est un service web. il peut être requetté par d'autre programme va HTTP afin de remplir les fonctionnalités liée à la gestion des comptes utilisateurs. Il offre la possibilité de faire les requettes suivantes :
+Ce projet est un service web. il peut être requetté par d'autres applications via HTTP afin de remplir les fonctionnalités liées à la gestion des comptes utilisateurs. Il offre la possibilité de faire les requêtes suivantes :
  
  <span style="color:#193366">__1- [GET] "http://~/users/" :__</span>
     Cette route permet de récupérer l'ensemble des objets users 
@@ -46,17 +46,16 @@ Ce projet est un service web. il peut être requetté par d'autre programme va H
 }
 ```
    
-   2- [GET] "http://~/users/{id}":
-     
-   Cette route permet de récupérer L'objet users correspendant à l'id passé en paramétre.
+   <span style="color:#193366">__2- [GET] "http://~/users/{id}" :__</span>
+   Cette route permet de récupérer L'objet user correspendant à l'id passé en paramétre.
    L'objet est renvoyé sous le même format JSON.
     
-   3- [POST] "http://~/users/add":
-     Cette route permet d'ajouter un utilisateur à la base de donnée.
-     Elle prend en paramétre un objet users sous format JSON dans le body de la requête.
+   <span style="color:#193366">__3- [POST] "http://~/users/add" :__</span>
+     Cette route permet d'ajouter un utilisateur à la base de donnée en utilisant la méthode **POST**
+     Elle prend en paramétre un objet user sous format JSON dans le body de la requête.
      
     
-   4- [PUT] "http://~/users/update":
+   <span style="color:#193366">__4- [PUT] "http://~/users/update": __</span>
     
    5- [DELETE] "http://~/users/delete/{id}":
     
