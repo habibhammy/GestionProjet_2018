@@ -50,7 +50,7 @@ Ce projet est un service web. il peut être requetté par d'autres applications 
    
    <span style="color:#193366">__2- [GET] "http://~/users/{id}" :__</span>
    
-   Cette route permet de récupérer L'objet user correspendant à l'id passé en paramétre.
+   Cette route permet de récupérer l'objet user correspondant à l'id passé en paramètre.
    
    L'objet est renvoyé sous le même format JSON.
     
@@ -58,20 +58,20 @@ Ce projet est un service web. il peut être requetté par d'autres applications 
    
    Cette route permet d'ajouter un utilisateur à la base de donnée en utilisant la méthode **POST**
    
-   Elle prend en paramétre un username passé dans le header de la requête.
+   Elle prend en paramètre un username passé dans le header de la requête.
      
     
   <span style="color:#193366">__4- [PUT] "http://~/users/update":__</span>
   
-  Cette route permet de modifier les informations un utilisateur dans la base de donnée en utilisant la méthode **PUT**
+  Cette route permet de modifier les informations d'un utilisateur dans la base de donnée en utilisant la méthode **PUT**
   
-  Elle prend en paramétre un objet user sous format JSON dans le body de la requête.
+  Elle prend en paramètre un objet user sous format JSON dans le body de la requête.
      
    <span style="color:#193366">__5- [DELETE] "http://~/users/delete/{id}":__</span>
    
    Cette route permet de supprimer un utilisateur de la base de donnée en utilisant la méthode **DELETE**
    
-   Elle prend l'id de l'utilisateur à supprimer comme paramétre dans l'URL de la requête.
+   Elle prend l'id de l'utilisateur à supprimer comme paramètre dans l'URL de la requête.
      
    <span style="color:#193366">__6- [GET] "http://~/connexion/":__</span>
    
@@ -81,25 +81,25 @@ Ce projet est un service web. il peut être requetté par d'autres applications 
    
    Cette route permet à un utilisateur dans la base de donnée de s'identifier.
    
-   Elle prend en paramétre un username et un mot de passe dans le header de la requête.
+   Elle prend en paramètre un username et un mot de passe dans le header de la requête.
    
-   Elle renvoie le tokken généré.
+   Elle renvoie le token généré.
      
    <span style="color:#193366">__8- [POST] "http://~/connexion/isauth":__</span>
    
-   Cette route permet le tokken d'un utilisateur. Cela permettra de vérifier si un utilisateur est bien authentifié.
+   Cette route permet de générer le token d'un utilisateur. Cela permettra de vérifier si un utilisateur est bien authentifié.
    
-   Elle prend en paramétre un username et son tokken passé dans le header de la requête.
+   Elle prend en paramètre un username et son token passé dans le header de la requête.
    
-   Elle renvoie ***'TRUE'*** ou ***'FALSE'*** .
+   Elle renvoie ***'TRUE'***  si l'utilisateur est bien connecté sinon elle retourne ***'FALSE'*** .
      
    <span style="color:#193366">__9- [DELETE] "http://~/connexion/decon":__</span>
    
-   Cette route permet à un utilisateur dans la base de donnée de ce déconnecter.
+   Cette route permet à un utilisateur de ce déconnecter.
    
-   Elle prend en paramétre un username et son tokken passé dans le header de la requête.
+   Elle prend en paramètre un username et son token passé dans le header de la requête.
    
-   Elle renvoie ***'TRUE'*** ou ***'FALSE'*** .
+   Elle renvoie ***'TRUE'*** si la déconnection s'est bie npassé sinon elle renvoie ***'FALSE'*** .
     
 #### 3-2 Le model :
 Le model utilisé dans ce projet est constitué de la classe **USERS**.
@@ -195,7 +195,7 @@ public class ConnexionService {
 }
 ```
 #### 3-4 La base de données:
-La base de données a été géré par le moteur de base de données H2. Les fichiers ***schema.sql*** et ***data.sql*** permettent d'initialiser la base de données à chaque déployement.
+La base de données a été géré par le moteur de base de données en mémoire H2. Les fichiers ***schema.sql*** et ***data.sql*** permettent d'initialiser la base de données à chaque déployement.
 
 La classe ***UserRepository*** représente l'interface DAO responsable de la connexion à la base de données.
 ```java
