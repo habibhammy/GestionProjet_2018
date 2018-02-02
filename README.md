@@ -75,7 +75,7 @@ Ce projet est un service web. il peut être requetté par d'autres applications 
      
    <span style="color:#193366">__6- [GET] "http://~/connexion/":__</span>
    
-   Cette route permet de récupérer l'ensemble des correspendances des user-tokken générées.
+   Cette route permet de récupérer l'ensemble des correspendances des user-token générées.
      
    <span style="color:#193366">__7- [POST] "http://~/connexion/auth":__</span>
    
