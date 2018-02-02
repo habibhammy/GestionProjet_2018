@@ -31,9 +31,11 @@ Pour exécuter ce projet, suivez les instructions suivantes :
 Ce projet est un service web. il peut être requetté par d'autres applications via HTTP afin de remplir les fonctionnalités liées à la gestion des comptes utilisateurs. Il offre la possibilité de faire les requêtes suivantes :
  
  <span style="color:#193366">__1- [GET] "http://~/users/" :__</span>
-    Cette route permet de récupérer l'ensemble des objets users 
-    présent dans la base de données.
-    Les users sont renvoyés sous format JSON :
+ 
+ Cette route permet de récupérer l'ensemble des objets users 
+ présent dans la base de données.
+ 
+ Les users sont renvoyés sous format JSON :
     
 ```json
 {
