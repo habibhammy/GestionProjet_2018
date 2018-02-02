@@ -1,4 +1,5 @@
-CREATE TABLE users
+--drop table users;
+CREATE TABLE IF NOT EXISTS users
 (
     id bigint NOT NULL,
     username VARCHAR(40) NOT NULL,
