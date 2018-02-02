@@ -1,9 +1,9 @@
 ## Gestion de projet : Comptes Utilisateurs API
 ### 1 - Introduction : 
-##### Déscriptif
+##### 1-1 Descriptif
 Ce projet est un service web (API) permettant la création, suppression, modification de comptes utilisateurs. Elle permet aussi une connexion/déconnexion d'un utilisateur.
 
-##### Auteurs
+##### 1-2 Auteurs
 
 - HAMMY Mohammed El Habib
 - **Email**: habib.hammy@gmail.com
@@ -11,7 +11,7 @@ Ce projet est un service web (API) permettant la création, suppression, modific
 - **Email**: kabbouchnasreddine@gmail.com
 ### 2 - Mode d'utilisation :
 #### 2-1 Prérequis:
-Pour le bon fonctionnement de cette API, les programmes suivants sont nécéssaires :
+Pour le bon fonctionnement de cette API, les programmes suivants sont nécessaires :
 
   * JRE 8 ou ultérieur
   * H2 database 1.4.196
@@ -22,9 +22,9 @@ Pour le bon fonctionnement de cette API, les programmes suivants sont nécéssai
 #### 2-2 Démarage:
 Pour exécuter ce projet, suivez les instructions suivantes :
 
-1. Dans Eclipse faite *{ [RightClick]>Maven>Update Porject }* puis *{ OK }* dans l'onglet qui s'ouvrira. Cela permettra d'importer toutes les dépendences du projet.
+1. Dans Eclipse faite **{ [RightClick]>Maven>Update Porject }** puis **{ OK }** dans l'onglet qui s'ouvrira. Cela permettra d'importer toutes les dépendences du projet.
 
-2. Puis faite *{ [RightClick]>Run As>Spring Boot App }* pour lancer le service.
+2. Puis faite **{ [RightClick]>Run As>Spring Boot App }** pour lancer le service.
  
 ### 3 - Descriptif Technique :
 #### 3-1 Les routes :
@@ -55,15 +55,15 @@ Ce projet est un service web. il peut être requetté par d'autres applications 
      Elle prend en paramétre un objet user sous format JSON dans le body de la requête.
      
     
-   <span style="color:#193366">__4- [PUT] "http://~/users/update": __</span>
+  <span style="color:#193366">__4- [PUT] "http://~/users/update": __</span>
     
-   5- [DELETE] "http://~/users/delete/{id}":
+   <span style="color:#193366">__5- [DELETE] "http://~/users/delete/{id}": __</span>
     
-   6- [GET] "http://~/connexion/":
+   <span style="color:#193366">__6- [GET] "http://~/connexion/": __</span>
     
-   7- [POST] "http://~/connexion/auth":
+   <span style="color:#193366">__7- [POST] "http://~/connexion/auth": __</span>
     
-   8- [POST] "http://~/connexion/isauth":
+   <span style="color:#193366">__8- [POST] "http://~/connexion/isauth": __</span>
     
    9- [DELETE] "http://~/connexion/decon":
     
