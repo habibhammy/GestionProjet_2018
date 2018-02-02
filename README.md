@@ -52,20 +52,34 @@ Ce projet est un service web. il peut être requetté par d'autres applications 
     
    <span style="color:#193366">__3- [POST] "http://~/users/add" :__</span>
      Cette route permet d'ajouter un utilisateur à la base de donnée en utilisant la méthode **POST**
-     Elle prend en paramétre un objet user sous format JSON dans le body de la requête.
+     Elle prend en paramétre un username passé dans le header de la requête.
      
     
-  <span style="color:#193366">__4- [PUT] "http://~/users/update": __</span>
-    
-   <span style="color:#193366">__5- [DELETE] "http://~/users/delete/{id}": __</span>
-    
-   <span style="color:#193366">__6- [GET] "http://~/connexion/": __</span>
-    
-   <span style="color:#193366">__7- [POST] "http://~/connexion/auth": __</span>
-    
-   <span style="color:#193366">__8- [POST] "http://~/connexion/isauth": __</span>
-    
-   9- [DELETE] "http://~/connexion/decon":
+  <span style="color:#193366">__4- [PUT] "http://~/users/update":__</span>
+    Cette route permet de modifier les informations un utilisateur dans la base de donnée en utilisant la méthode **PUT**
+     Elle prend en paramétre un objet user sous format JSON dans le body de la requête.
+     
+   <span style="color:#193366">__5- [DELETE] "http://~/users/delete/{id}":__</span>
+    Cette route permet de supprimer un utilisateur de la base de donnée en utilisant la méthode **DELETE**
+     Elle prend l'id de l'utilisateur à supprimer comme paramétre dans l'URL de la requête.
+     
+   <span style="color:#193366">__6- [GET] "http://~/connexion/":__</span>
+    Cette route permet de récupérer l'ensemble des correspendances des user-tokken générées.
+     
+   <span style="color:#193366">__7- [POST] "http://~/connexion/auth":__</span>
+    Cette route permet à un utilisateur dans la base de donnée de s'identifier.
+     Elle prend en paramétre un username et un mot de passe dans le header de la requête.
+     Elle renvoie le tokken généré.
+     
+   <span style="color:#193366">__8- [POST] "http://~/connexion/isauth":__</span>
+    Cette route permet le tokken d'un utilisateur. Cela permettra de vérifier si un utilisateur est bien authentifié.
+    Elle prend en paramétre un username et son tokken passé dans le header de la requête.
+    Elle renvoie ***'TRUE'*** ou ***'FALSE'*** .
+     
+   <span style="color:#193366">__9- [DELETE] "http://~/connexion/decon":__</span>
+    Cette route permet à un utilisateur dans la base de donnée de ce déconnecter.
+    Elle prend en paramétre un username et son tokken passé dans le header de la requête.
+    Elle renvoie ***'TRUE'*** ou ***'FALSE'*** .
     
 #### 3-2 Le model :
 
