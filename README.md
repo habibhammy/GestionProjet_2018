@@ -104,7 +104,36 @@ Ce projet est un service web. il peut être requetté par d'autres applications 
 #### 3-2 Le model :
 Le model utilisé dans ce projet est constitué de la classe **USERS**.
 ```java
+public class Users {
+	
+	@Id
+	@Column(name="id")
+	private long id;
+	
+	@Column(name="username")
+	@JsonProperty(value = "username")
+    private String username;
+	
+	@Column(name="passwords")
+	@JsonIgnore
+    private String passwords;
 
+	@Column(name="email")
+	@JsonProperty(value = "email")
+	private String email;
+	
+	@Column(name="firstname")
+	@JsonProperty(value = "firstname")
+	private String firstname;
+	
+	@Column(name="lastname")
+	@JsonProperty(value = "lastname")
+	private String lastname;
+	
+	@Column(name="country")
+	@JsonProperty(value = "country")
+	private String country;
+ }
 ```
 #### 3-3 Les services:
 
