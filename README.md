@@ -141,13 +141,58 @@ Dans ce projet deux services différents coexistent pour gérer les différentes
 
 Le service **UserService**
 ```java
+@RestController
+@RequestMapping(value="/user")
+public class UserService {
 
+  @Autowired
+  UserRepository userrepo;
+
+  @RequestMapping(value="/",method = RequestMethod.GET)
+  @ResponseBody
+  public List<Users> getAllUsers(){...}
+  @RequestMapping(value="/{id}",method = RequestMethod.GET,produces={"application/json"})
+  @ResponseBody
+  public Users getUser(@PathVariable long id){...}
+
+  @RequestMapping(value="/add",method = RequestMethod.POST)
+  public Users addUser(@RequestParam(value="username") String username){...}
+
+  @RequestMapping(value="/update",method = RequestMethod.PUT)
+  public Users updateUser(@RequestBody Users user) throws Exception {...}
+
+  @RequestMapping(value="/delete/{id}",method = RequestMethod.DELETE)
+  public List<Users> deleteStudent(@PathVariable long id) throws Exception {...}
+}
 ```
 
 
 Le service **ConnexionService**
 ```java
 
+@RestController
+@RequestMapping(value="/connexion")
+public class ConnexionService {
+
+  @Autowired
+  UserRepository userrepo;
+
+  private static HashMap<String,String> tokens= new HashMap<String,String>();
+
+  @RequestMapping(value="/",method = RequestMethod.GET)
+  public HashMap<String,String> getAllTokens(){...}
+  
+  @RequestMapping(value="/auth",method = RequestMethod.POST)
+  public String Authentification(@RequestParam(value="username") String username,@RequestParam(value="password") String password){...}
+  
+  @RequestMapping(value="/isauth",method = RequestMethod.POST)
+  public boolean isAuthentified(@RequestParam(value="username") String username,@RequestParam(value="token") String token){...}
+
+  @RequestMapping(value="/decon",method = RequestMethod.DELETE)
+  public boolean Deconnecte(@RequestParam(value="username") String username,@RequestParam(value="token") String token){...}
+
+  private static String generatetoken() {...}
+}
 ```
 #### 3-4 La base de données:
 La base de données a été géré par le moteur de base de données H2. Les fichiers ***schema.sql*** et ***data.sql*** permettent d'initialiser la base de données à chaque déployement.
@@ -155,4 +200,18 @@ La base de données a été géré par le moteur de base de données H2. Les fic
 La classe ***UserRepository*** représente l'interface DAO responsable de la connexion à la base de données.
 ```java
 
+public interface UserRepository  extends JpaRepository<Users, Long> {
+	@Modifying
+	@Transactional
+	@Query(value="delete from Users u where u.id = ?1")
+	void deleteById(Long id);
+	
+	
+	@Query(value="select u from Users u where u.username= ?1 and u.passwords = ?2")
+	Users getByUserNameandPassword(String username, String password);
+	
+	
+	@Query(value="select u from Users u where u.username= ?1")
+	Users getByUserName(String username);
+}
 ```
