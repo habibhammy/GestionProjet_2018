@@ -9,7 +9,7 @@ import com.m2gi.gestionprojet.modele.Users;
 import com.m2gi.gestionprojet.repository.UserRepository;
 
 @RestController
-@RequestMapping(value="/user")
+@RequestMapping(value="/api/user")
 public class UserService {
 
 	@Autowired

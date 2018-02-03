@@ -12,7 +12,7 @@ import com.m2gi.gestionprojet.modele.Users;
 import com.m2gi.gestionprojet.repository.UserRepository;
 
 @RestController
-@RequestMapping(value="/connexion")
+@RequestMapping(value="/api/connexion")
 public class ConnexionService {
 
 	@Autowired
