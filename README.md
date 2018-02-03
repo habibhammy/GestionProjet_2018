@@ -9,6 +9,8 @@ Ce projet est un service web (API) permettant la création, suppression, modific
 - **Email**: habib.hammy@gmail.com
 - KABBOUCH Nasreddine
 - **Email**: kabbouchnasreddine@gmail.com
+- ALLOUANE Dounia
+- **Email**: allouane.dounia@gmail.com
 ### 2 - Mode d'utilisation :
 #### 2-1 Prérequis:
 Pour le bon fonctionnement de cette API, les programmes suivants sont nécessaires :
