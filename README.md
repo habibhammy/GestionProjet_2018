@@ -30,7 +30,7 @@ Pour exécuter ce projet, suivez les instructions suivantes :
 #### 3-1 Les routes :
 Ce projet est un service web. il peut être requetté par d'autres applications via HTTP afin de remplir les fonctionnalités liées à la gestion des comptes utilisateurs. Il offre la possibilité de faire les requêtes suivantes :
  
- <span style="color:#193366">__1- [GET] "http://~/api/users/" :__</span>
+ <span style="color:#193366">__1- [GET] "http://~/api/user/" :__</span>
  
  Cette route permet de récupérer l'ensemble des objets users 
  présent dans la base de données.
@@ -48,26 +48,26 @@ Ce projet est un service web. il peut être requetté par d'autres applications 
 }
 ```
    
-   <span style="color:#193366">__2- [GET] "http://~/api/users/{id}" :__</span>
+   <span style="color:#193366">__2- [GET] "http://~/api/user/{id}" :__</span>
    
    Cette route permet de récupérer l'objet user correspondant à l'id passé en paramètre.
    
    L'objet est renvoyé sous le même format JSON.
     
-   <span style="color:#193366">__3- [POST] "http://~/api/users/add" :__</span>
+   <span style="color:#193366">__3- [POST] "http://~/api/user/add" :__</span>
    
    Cette route permet d'ajouter un utilisateur à la base de donnée en utilisant la méthode **POST**
    
    Elle prend en paramètre un username passé dans le header de la requête.
      
     
-  <span style="color:#193366">__4- [PUT] "http://~/api/users/update":__</span>
+  <span style="color:#193366">__4- [PUT] "http://~/api/user/update":__</span>
   
   Cette route permet de modifier les informations d'un utilisateur dans la base de donnée en utilisant la méthode **PUT**
   
   Elle prend en paramètre un objet user sous format JSON dans le body de la requête.
      
-   <span style="color:#193366">__5- [DELETE] "http://~/api/users/delete/{id}":__</span>
+   <span style="color:#193366">__5- [DELETE] "http://~/api/user/delete/{id}":__</span>
    
    Cette route permet de supprimer un utilisateur de la base de donnée en utilisant la méthode **DELETE**
    
