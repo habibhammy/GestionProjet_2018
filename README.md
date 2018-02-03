@@ -9,6 +9,8 @@ Ce projet est un service web (API) permettant la création, suppression, modific
 - **Email**: habib.hammy@gmail.com
 - KABBOUCH Nasreddine
 - **Email**: kabbouchnasreddine@gmail.com
+- ALLOUANE Dounia
+- **Email**: allouane.dounia@gmail.com
 ### 2 - Mode d'utilisation :
 #### 2-1 Prérequis:
 Pour le bon fonctionnement de cette API, les programmes suivants sont nécessaires :
@@ -30,7 +32,7 @@ Pour exécuter ce projet, suivez les instructions suivantes :
 #### 3-1 Les routes :
 Ce projet est un service web. il peut être requetté par d'autres applications via HTTP afin de remplir les fonctionnalités liées à la gestion des comptes utilisateurs. Il offre la possibilité de faire les requêtes suivantes :
  
- <span style="color:#193366">__1- [GET] "http://~/users/" :__</span>
+ <span style="color:#193366">__1- [GET] "http://~/api/user/" :__</span>
  
  Cette route permet de récupérer l'ensemble des objets users 
  présent dans la base de données.
@@ -48,36 +50,36 @@ Ce projet est un service web. il peut être requetté par d'autres applications 
 }
 ```
    
-   <span style="color:#193366">__2- [GET] "http://~/users/{id}" :__</span>
+   <span style="color:#193366">__2- [GET] "http://~/api/user/{id}" :__</span>
    
    Cette route permet de récupérer l'objet user correspondant à l'id passé en paramètre.
    
    L'objet est renvoyé sous le même format JSON.
     
-   <span style="color:#193366">__3- [POST] "http://~/users/add" :__</span>
+   <span style="color:#193366">__3- [POST] "http://~/api/user/add" :__</span>
    
    Cette route permet d'ajouter un utilisateur à la base de donnée en utilisant la méthode **POST**
    
    Elle prend en paramètre un username passé dans le header de la requête.
      
     
-  <span style="color:#193366">__4- [PUT] "http://~/users/update":__</span>
+  <span style="color:#193366">__4- [PUT] "http://~/api/user/update":__</span>
   
   Cette route permet de modifier les informations d'un utilisateur dans la base de donnée en utilisant la méthode **PUT**
   
   Elle prend en paramètre un objet user sous format JSON dans le body de la requête.
      
-   <span style="color:#193366">__5- [DELETE] "http://~/users/delete/{id}":__</span>
+   <span style="color:#193366">__5- [DELETE] "http://~/api/user/delete/{id}":__</span>
    
    Cette route permet de supprimer un utilisateur de la base de donnée en utilisant la méthode **DELETE**
    
    Elle prend l'id de l'utilisateur à supprimer comme paramètre dans l'URL de la requête.
      
-   <span style="color:#193366">__6- [GET] "http://~/connexion/":__</span>
+   <span style="color:#193366">__6- [GET] "http://~/api/connexion/":__</span>
    
    Cette route permet de récupérer l'ensemble des correspendances des user-token générées.
      
-   <span style="color:#193366">__7- [POST] "http://~/connexion/auth":__</span>
+   <span style="color:#193366">__7- [POST] "http://~/api/connexion/auth":__</span>
    
    Cette route permet à un utilisateur dans la base de donnée de s'identifier.
    
@@ -85,7 +87,7 @@ Ce projet est un service web. il peut être requetté par d'autres applications 
    
    Elle renvoie le token généré.
      
-   <span style="color:#193366">__8- [POST] "http://~/connexion/isauth":__</span>
+   <span style="color:#193366">__8- [POST] "http://~/api/connexion/isauth":__</span>
    
    Cette route permet de générer le token d'un utilisateur. Cela permettra de vérifier si un utilisateur est bien authentifié.
    
@@ -93,7 +95,7 @@ Ce projet est un service web. il peut être requetté par d'autres applications 
    
    Elle renvoie ***'TRUE'***  si l'utilisateur est bien connecté sinon elle retourne ***'FALSE'*** .
      
-   <span style="color:#193366">__9- [DELETE] "http://~/connexion/decon":__</span>
+   <span style="color:#193366">__9- [DELETE] "http://~/api/connexion/decon":__</span>
    
    Cette route permet à un utilisateur de ce déconnecter.
    
