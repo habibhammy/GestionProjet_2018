@@ -1,0 +1,353 @@
+swagger: "2.0"
+info:
+  description: "Service web (API) permettant la création, suppression, modification de comptes utilisateurs. Elle permet aussi une connexion/déconnexion d'un utilisateur."
+  version: "1.0.0"
+  title: "Swagger UserAccount"
+  #termsOfService: "http://swagger.io/terms/"
+  #contact:
+   # email: "apiteam@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+#host: "petstore.swagger.io"
+basePath: "/jenkins/UserAccount/api"
+tags:
+- name: "user"
+  description: "CRUD user"
+- name: "Connexion"
+  description: "Génération user-token"
+schemes:
+- "http"
+paths:
+  /user/add:
+    post:
+      tags:
+      - "user"
+      summary: "Creer user"
+      description: "Cette route permet d'ajouter un utilisateur à la base de donnée en utilisant la méthode POST."
+      consumes:
+        - application/json
+      parameters:
+        - in: query
+          name: username
+          required: true
+          type: string
+          description: Le user a cree.
+      responses:
+        201:
+          description: Created
+  /user/:
+    get:
+      tags:
+      - "user"
+      summary: "Retourne tous les users stocké dans la base de données"
+      description: ""
+      produces:
+      - "application/json"
+      
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "object"
+            properties:
+              id:
+                type: integer
+                example: 100
+              username:
+                type: string
+                example: alice
+              email:
+                type: string
+                example: a@a.com
+              firstname:
+                type: string
+                example: alice
+              lastname:
+                type: string
+                example: alice
+              country: 
+                type: string
+                example: FRANCE
+          headers:
+            X-Rate-Limit:
+              type: "integer"
+              format: "int32"
+              description: "calls per hour allowed by the user"
+            X-Expires-After:
+              type: "string"
+              format: "date-time"
+              description: "date in UTC when token expires"
+        404:
+          description: "Not found"
+
+  /user/{id}:
+    get:
+      tags:
+      - "user"
+      summary: "retourne user par id"
+      description: ""
+      produces:
+      - "application/json"
+      parameters:
+        - in: path
+          name: id   
+          required: true
+          type: integer
+          minimum: 1
+          description: "Cette route permet de récupérer l'objet user correspondant à l'id passé en paramètre."
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "object"
+            properties:
+              id:
+                type: integer
+                example: 100
+              username:
+                type: string
+                example: alice
+              email:
+                type: string
+                example: a@a.com
+              firstname:
+                type: string
+                example: alice
+              lastname:
+                type: string
+                example: alice
+              country: 
+                type: string
+                example: FRANCE
+        400:
+          description: "Invalid id supplied"
+        404:
+          description: "User not found"
+
+  /user/update:
+    put:
+      tags:
+      - "user"
+      summary: Creates a new user.
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: user
+          description: le user à modifier.
+          schema:
+            type: object
+            required:
+              - username
+              - email
+            properties:
+              id:
+                type: integer
+                example: 100
+              username:
+                type: string
+                example: alice
+              email:
+                type: string
+                example: a@a.com
+              firstname:
+                type: string
+                example: alice
+              lastname:
+                type: string
+                example: alice
+              country: 
+                type: string
+                example: FRANCE
+      responses:
+        201:
+          description: Updated
+        204:
+          description: User was deleted.
+        400:
+          description: "Invalid username supplied"
+        404:
+          description: "User not found"
+  /user/delete/{id}:
+    delete:
+      tags:
+      - "user"
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        required: true
+        description: user ID.
+      responses:
+        204:
+          description: User was deleted.
+        400:
+          description: "Invalid username supplied"
+        404:
+          description: "User not found"
+                  #securityDefinitions:
+                  #  petstore_auth:
+                   #   type: "oauth2"
+                    #  authorizationUrl: "http://petstore.swagger.io/oauth/dialog"
+                     # flow: "implicit"
+                      #scopes:
+                       # write:pets: "modify pets in your account"
+                        #read:pets: "read your pets"
+                    #api_key:
+                     # type: "apiKey"
+                      #name: "api_key"
+                    #  in: "header"
+              
+  /connexion/:
+    get:
+      tags:
+      - "Connexion"
+      
+      summary: "user-token générées."
+      description: "Cette route permet de récupérer l'ensemble des correspendances des user-token générées.
+
+"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "object"
+            properties:
+              username:
+                type: string
+                example: alice
+              token:
+                type: string
+                example: qdhf+g_skdhn/ztfsdhgv_(^-zekuhsfd_djfhf_èe-rhgr
+              
+          headers:
+            X-Rate-Limit:
+              type: "integer"
+              format: "int32"
+              description: "calls per hour allowed by the user"
+            X-Expires-After:
+              type: "string"
+              format: "date-time"
+              description: "date in UTC when token expires"
+        404:
+          description: "Not found"
+  /connexion/auth:
+    post:
+      tags:
+      - "Connexion"
+      summary: "Authentification"
+      description: "Cette route permet à un utilisateur dans la base de donnée de s'identifier."
+      consumes:
+        - application/json
+      parameters:
+        - in: query
+          name: username
+          required: true
+          type: string
+        - in: query
+          name: password
+          required: true
+          type: string
+      responses:
+        200:
+          description: Ok
+  /connexion/isauth:
+    post:
+        tags:
+        - "Connexion"
+        summary: "verefie Authentification"
+        description: "Cette route permet de générer le token d'un utilisateur. Cela permettra de vérifier si un utilisateur est bien authentifié"
+        consumes:
+          - application/json
+        parameters:
+          - in: query
+            name: username
+            required: true
+            type: string
+          - in: query
+            name: token
+            required: true
+            type: string
+        responses:
+          200:
+            description: TRUE/FALSE
+  /connexion/decon:
+    delete:
+        tags:
+        - "Connexion"
+        parameters:
+        - in: query
+          name: username
+          type: string
+          required: true
+          description: user ID.
+          
+        - in: query
+          name: token
+          type: string
+          required: true
+        
+        responses:
+          204:
+            description: TRUE/FALSE.
+          400:
+            description: "Invalid username supplied"
+          404:
+            description: "User not found"
+            
+            
+definitions:
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int32"
+      username:
+        type: "string"
+      email:
+        type: "string"
+      firstname:
+        type: "string"
+      lastname:
+        type: "string"
+      country:
+        type: "string"
+  Connexion:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int32"
+      username:
+        type: "string"
+      email:
+        type: "string"
+      firstname:
+        type: "string"
+      lastname:
+        type: "string"
+      country:
+        type: "string"
+  ApiResponse:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int32"
+      username:
+        type: "string"
+      email:
+        type: "string"
+      firstname:
+        type: "string"
+      lastname:
+        type: "string"
+      country:
+        type: "string"
+externalDocs:
+  description: "Trouve le repository source"
+  url: "https://github.com/habibhammy/GestionProjet_2018"
