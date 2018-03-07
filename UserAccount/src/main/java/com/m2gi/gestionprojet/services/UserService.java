@@ -1,5 +1,6 @@
 package com.m2gi.gestionprojet.services;
 
+import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,10 @@ public class UserService {
 	 * Post Methods
 	 */
 	@RequestMapping(value="/add",method = RequestMethod.POST)
-	public Users addUser(@RequestParam(value="username") String username){
-		Users user=new Users(username,"000A000");
+	public Users addUser(@RequestParam(value="username") String username,@RequestParam(value="password") String password){
+		byte[] valueDecoded = Base64.getDecoder().decode(password.getBytes());
+		password = new String(valueDecoded);		
+		Users user=new Users(username,password);
 		userrepo.saveAndFlush(user);
 		return userrepo.getOne(new Long(user.getId()));
 	}

@@ -12,6 +12,7 @@ public class Users {
 	
 	@Id
 	@Column(name="id")
+	@JsonIgnore
 	private long id;
 	
 	@Column(name="username")
@@ -24,18 +25,22 @@ public class Users {
 
 	@Column(name="email")
 	@JsonProperty(value = "email")
+	//@JsonIgnore
 	private String email;
 	
 	@Column(name="firstname")
 	@JsonProperty(value = "firstname")
+	//@JsonIgnore
 	private String firstname;
 	
 	@Column(name="lastname")
 	@JsonProperty(value = "lastname")
+	//@JsonIgnore
 	private String lastname;
 	
 	@Column(name="country")
 	@JsonProperty(value = "country")
+	//@JsonIgnore
 	private String country;
  
     public Users() {
