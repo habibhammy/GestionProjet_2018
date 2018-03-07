@@ -4,6 +4,7 @@ import java.util.Base64;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +14,7 @@ import com.m2gi.gestionprojet.modele.Users;
 import com.m2gi.gestionprojet.repository.UserRepository;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:8080")
 @RequestMapping(value="/api/connexion")
 public class ConnexionService {
 
