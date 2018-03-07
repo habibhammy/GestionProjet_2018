@@ -1,5 +1,6 @@
 package com.m2gi.gestionprojet.services;
 
+import java.util.Base64;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,45 +35,52 @@ public class ConnexionService {
 	 */
 	@RequestMapping(value="/auth",method = RequestMethod.POST)
 	public String Authentification(@RequestParam(value="username") String username,@RequestParam(value="password") String password){		
-
-		Users user=  userrepo.getByUserNameandPassword(username, password);
-		if(user != null){
-			if(!tokens.containsKey(user.getUsername())){
-				tokens.put(user.getUsername(), generatetoken());
-			}	
+		byte[] valueDecoded = Base64.getDecoder().decode(password.getBytes());
+		password = new String(valueDecoded);
+		//System.out.println("password decoded:"+password);
+		
+		try {
+			Users user=  userrepo.getByUserNameandPassword(username, password);
+			if(user != null){
+				if(!tokens.containsKey(user.getUsername())){
+					tokens.put(user.getUsername(), generatetoken());
+				}	
+			}
+			return "{ \"token\":\""+tokens.get(user.getUsername())+"\" }";
+		} catch (Exception e) {
+			return "{ \"error\": \"Username ou Mot de passe incorrect\"";
 		}
-		return tokens.get(user.getUsername());
 	}
 	
 	@RequestMapping(value="/isauth",method = RequestMethod.POST)
-	public boolean isAuthentified(@RequestParam(value="username") String username,@RequestParam(value="token") String token){		
+	public String isAuthentified(@RequestParam(value="username") String username,@RequestParam(value="token") String token){		
 		Users user=  userrepo.getByUserName(username);
 		
 		if(user != null){
 			if(tokens.get(user.getUsername()).equals(token)){
-				return true;
+				return "{ \"isAuth\":\""+true+"\" }";
 			}
 		}
-		return false;
+		return "{ \"isAuth\":\""+false+"\" }";
 	}
 
 	@RequestMapping(value="/decon",method = RequestMethod.DELETE)
-	public boolean Deconnecte(@RequestParam(value="username") String username,@RequestParam(value="token") String token){		
+	public String Deconnecte(@RequestParam(value="username") String username,@RequestParam(value="token") String token){		
 
 		Users user=  userrepo.getByUserName(username);
 		if(user != null){
 			if(tokens.get(user.getUsername()).equals(token)){
 				tokens.remove(user.getUsername());
-				return true;
+				return "{ \"deconnected\":\""+true+"\" }";
 			}
 		}
-		return false;
+		return "{ \"deconnected\":\""+false+"\" }";
 	}
 
 	private static String generatetoken() {
 		int length = 126;
 		boolean generer = false;
-		String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890²&é\"'(-è_çà)=&é~{[|`\\^@]}/*-.!:;,<>ù%^¨$£¤?§°+"; 
+		String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890²&é'(-è_çà)=&é~{[|`^@]}*-.!:;,<>ù%^¨$£¤?§°+"; 
 		StringBuffer pass = null;
 		while(!generer){
 			pass = new StringBuffer();
@@ -85,7 +93,7 @@ public class ConnexionService {
 				generer = true;
 			}
 		}
-
+		
 		return pass.toString();
 	}
 }
