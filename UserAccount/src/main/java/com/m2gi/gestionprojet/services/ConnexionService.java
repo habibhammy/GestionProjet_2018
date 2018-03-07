@@ -54,27 +54,35 @@ public class ConnexionService {
 	
 	@RequestMapping(value="/isauth",method = RequestMethod.POST)
 	public String isAuthentified(@RequestParam(value="username") String username,@RequestParam(value="token") String token){		
-		Users user=  userrepo.getByUserName(username);
-		
-		if(user != null){
-			if(tokens.get(user.getUsername()).equals(token)){
-				return "{ \"isAuth\":\""+true+"\" }";
+		try {
+			Users user=  userrepo.getByUserName(username);
+			
+			if(user != null){
+				if(tokens.get(user.getUsername()).equals(token)){
+					return "{ \"isAuth\":\""+true+"\" }";
+				}
 			}
+			return "{ \"isAuth\":\""+false+"\" }";
+		} catch (Exception e) {
+			return "{ \"error\":\"Username ou token incorrect\" }";
 		}
-		return "{ \"isAuth\":\""+false+"\" }";
 	}
 
 	@RequestMapping(value="/decon",method = RequestMethod.DELETE)
 	public String Deconnecte(@RequestParam(value="username") String username,@RequestParam(value="token") String token){		
 
-		Users user=  userrepo.getByUserName(username);
-		if(user != null){
-			if(tokens.get(user.getUsername()).equals(token)){
-				tokens.remove(user.getUsername());
-				return "{ \"deconnected\":\""+true+"\" }";
+		try {
+			Users user=  userrepo.getByUserName(username);
+			if(user != null){
+				if(tokens.get(user.getUsername()).equals(token)){
+					tokens.remove(user.getUsername());
+					return "{ \"deconnected\":\""+true+"\" }";
+				}
 			}
+			return "{ \"deconnected\":\""+false+"\" }";
+		} catch (Exception e) {
+			return "{ \"error\":\"Username ou token incorrect\" }";
 		}
-		return "{ \"deconnected\":\""+false+"\" }";
 	}
 
 	private static String generatetoken() {
