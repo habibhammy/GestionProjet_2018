@@ -19,12 +19,14 @@ public class UserService {
 	/*
 	 * Get Methods
 	 */
+	@CrossOrigin
 	@RequestMapping(value="/",method = RequestMethod.GET)
 	@ResponseBody
 	public List<Users> getAllUsers(){
 		//System.out.println("gestallusers() ==> "+userrepo.findAll().toString());
 		return userrepo.findAll();
 	}
+	@CrossOrigin
 	@RequestMapping(value="/{id}",method = RequestMethod.GET,produces={"application/json"})
 	@ResponseBody
 	public Users getUser(@PathVariable long id){
@@ -35,6 +37,7 @@ public class UserService {
 	/*
 	 * Post Methods
 	 */
+	@CrossOrigin
 	@RequestMapping(value="/add",method = RequestMethod.POST)
 	public Users addUser(@RequestParam(value="username") String username,@RequestParam(value="password") String password){
 		byte[] valueDecoded = Base64.getDecoder().decode(password.getBytes());
@@ -47,6 +50,7 @@ public class UserService {
 	/*
 	 * Put Methods
 	 */
+	@CrossOrigin
 	@RequestMapping(value="/update",method = RequestMethod.PUT)
 	public Users updateUser(@RequestBody Users user) throws Exception {
 		
@@ -65,6 +69,7 @@ public class UserService {
 	/*
 	 * Delete Methods
 	 */
+	@CrossOrigin
 	@RequestMapping(value="/delete/{id}",method = RequestMethod.DELETE)
 	public List<Users> deleteStudent(@PathVariable long id) throws Exception {
 

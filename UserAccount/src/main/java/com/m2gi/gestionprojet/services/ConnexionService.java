@@ -14,7 +14,7 @@ import com.m2gi.gestionprojet.modele.Users;
 import com.m2gi.gestionprojet.repository.UserRepository;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8080")
+
 @RequestMapping(value="/api/connexion")
 public class ConnexionService {
 
@@ -27,6 +27,7 @@ public class ConnexionService {
 	/*
 	 * Get Methods
 	 */
+	@CrossOrigin
 	@RequestMapping(value="/",method = RequestMethod.GET)
 	public HashMap<String,String> getAllTokens(){
 		return tokens;
@@ -35,6 +36,7 @@ public class ConnexionService {
 	/*
 	 * Post Methods
 	 */
+	@CrossOrigin
 	@RequestMapping(value="/auth",method = RequestMethod.POST)
 	public String Authentification(@RequestParam(value="username") String username,@RequestParam(value="password") String password){		
 		byte[] valueDecoded = Base64.getDecoder().decode(password.getBytes());
@@ -53,7 +55,7 @@ public class ConnexionService {
 			return "{ \"error\": \"Username ou Mot de passe incorrect\"";
 		}
 	}
-	
+	@CrossOrigin
 	@RequestMapping(value="/isauth",method = RequestMethod.POST)
 	public String isAuthentified(@RequestParam(value="username") String username,@RequestParam(value="token") String token){		
 		try {
@@ -69,7 +71,7 @@ public class ConnexionService {
 			return "{ \"error\":\"Username ou token incorrect\" }";
 		}
 	}
-
+	@CrossOrigin
 	@RequestMapping(value="/decon",method = RequestMethod.DELETE)
 	public String Deconnecte(@RequestParam(value="username") String username,@RequestParam(value="token") String token){		
 
