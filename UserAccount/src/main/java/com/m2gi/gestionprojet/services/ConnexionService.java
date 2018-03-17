@@ -65,7 +65,7 @@ public class ConnexionService {
 			return "{ "+"\"id\":\""+user.getId()+"\" ,"+
 						"\"token\":\""+tokens.get(user.getUsername())+"\" }";
 		} catch (Exception e) {
-			return "{ \"error\": \"Username ou Mot de passe incorrect\" }";
+			return "{ \"error\": \"Username ou Mot de passe incorrect\"}";
 		}
 	}
 	@CrossOrigin
