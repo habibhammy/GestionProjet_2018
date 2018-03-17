@@ -50,7 +50,8 @@ public class ConnexionService {
 					tokens.put(user.getUsername(), generatetoken());
 				}	
 			}
-			return "{ \"token\":\""+tokens.get(user.getUsername())+"\" }";
+			return "{ "+"\"id\":\""+user.getId()+"\" ,"+
+						"\"token\":\""+tokens.get(user.getUsername())+"\" }";
 		} catch (Exception e) {
 			return "{ \"error\": \"Username ou Mot de passe incorrect\"";
 		}
