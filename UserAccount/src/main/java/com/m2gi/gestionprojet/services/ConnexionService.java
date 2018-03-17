@@ -2,9 +2,13 @@ package com.m2gi.gestionprojet.services;
 
 import java.util.Base64;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.json.JsonParser;
+import org.springframework.boot.json.JsonParserFactory;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,12 +42,20 @@ public class ConnexionService {
 	 */
 	@CrossOrigin
 	@RequestMapping(value="/auth",method = RequestMethod.POST)
-	public String Authentification(@RequestParam(value="username") String username,@RequestParam(value="password") String password){		
-		byte[] valueDecoded = Base64.getDecoder().decode(password.getBytes());
-		password = new String(valueDecoded);
-		//System.out.println("password decoded:"+password);
-		
+	public String Authentification(@RequestBody String cred/*@RequestParam(value="username") String username,@RequestParam(value="password") String password*/){		
+		//JSONObject obj;
 		try {
+			//System.out.println(cred);
+			JsonParser springParser = JsonParserFactory.getJsonParser();
+			Map<String, Object> result = springParser.parseMap(cred);
+			//obj = new JSONObject(cred);
+			
+			String username = (String)result.get("username");
+			String password = (String)result.get("password");
+
+			byte[] valueDecoded = Base64.getDecoder().decode(password.getBytes());
+			password = new String(valueDecoded);
+			//System.out.println("password decoded:"+password);
 			Users user=  userrepo.getByUserNameandPassword(username, password);
 			if(user != null){
 				if(!tokens.containsKey(user.getUsername())){
@@ -53,7 +65,7 @@ public class ConnexionService {
 			return "{ "+"\"id\":\""+user.getId()+"\" ,"+
 						"\"token\":\""+tokens.get(user.getUsername())+"\" }";
 		} catch (Exception e) {
-			return "{ \"error\": \"Username ou Mot de passe incorrect\"";
+			return "{ \"error\": \"Username ou Mot de passe incorrect\" }";
 		}
 	}
 	@CrossOrigin
