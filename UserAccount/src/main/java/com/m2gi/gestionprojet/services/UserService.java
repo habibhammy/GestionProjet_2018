@@ -2,19 +2,9 @@ package com.m2gi.gestionprojet.services;
 
 import java.util.Base64;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.config.ResourceNotFoundException;
-import org.springframework.boot.json.JsonParser;
-import org.springframework.boot.json.JsonParserFactory;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.m2gi.gestionprojet.modele.Users;
 import com.m2gi.gestionprojet.repository.UserRepository;
@@ -41,15 +31,7 @@ public class UserService {
 	@ResponseBody
 	public Users getUser(@PathVariable long id){
 		//System.out.println("user="+userrepo.getOne(new Long(id)));
-		Users u = null ;
-		try{
-			u = userrepo.getOne(new Long(id));
-//			if(u==null)
-//				return response->json(["error" => "User not found!"], 404);
-		}catch(Exception e){
-//			return response->json(["error" => "User not found!"], 404);
-		}
-		return  u;
+		return  userrepo.getOne(new Long(id));
 	}
 
 	/*
@@ -57,14 +39,7 @@ public class UserService {
 	 */
 	@CrossOrigin
 	@RequestMapping(value="/add",method = RequestMethod.POST)
-	public Users addUser(@RequestBody String cred/*@RequestParam(value="username") String username,@RequestParam(value="password") String password*/){
-		JsonParser springParser = JsonParserFactory.getJsonParser();
-		Map<String, Object> result = springParser.parseMap(cred);
-		//obj = new JSONObject(cred);
-		
-		String username = (String)result.get("username");
-		String password = (String)result.get("password");
-		
+	public Users addUser(@RequestParam(value="username") String username,@RequestParam(value="password") String password){
 		byte[] valueDecoded = Base64.getDecoder().decode(password.getBytes());
 		password = new String(valueDecoded);		
 		Users user=new Users(username,password);
