@@ -76,10 +76,11 @@ public class ConnexionService {
 			Map<String, Object> result = springParser.parseMap(cred);
 			//obj = new JSONObject(cred);
 			
-			String id = (String)result.get("id");
+
+			String username = (String)result.get("username");
 			String token = (String)result.get("token");
 			
-			Users user=  userrepo.getOne(new Long(id));
+			Users user=  userrepo.getByUserName(username);
 			
 			if(user != null){
 				if(tokens.get(user.getId()).equals(token)){
@@ -99,10 +100,10 @@ public class ConnexionService {
 			Map<String, Object> result = springParser.parseMap(cred);
 			//obj = new JSONObject(cred);
 			
-			String id = (String)result.get("id");
+			String username = (String)result.get("username");
 			String token = (String)result.get("token");
 			
-			Users user=  userrepo.getOne(new Long(id));
+			Users user=  userrepo.getByUserName(username);
 			
 			if(user != null){
 				if(tokens.get(user.getId()).equals(token)){
