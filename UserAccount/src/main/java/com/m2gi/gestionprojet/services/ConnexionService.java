@@ -25,7 +25,7 @@ public class ConnexionService {
 	@Autowired
 	UserRepository userrepo;
 
-	private static HashMap<String,String> tokens= new HashMap<String,String>();
+	private static HashMap<Long,String> tokens= new HashMap<Long,String>();
 
 	
 	/*
@@ -33,7 +33,7 @@ public class ConnexionService {
 	 */
 	@CrossOrigin
 	@RequestMapping(value="/",method = RequestMethod.GET)
-	public HashMap<String,String> getAllTokens(){
+	public HashMap<Long,String> getAllTokens(){
 		return tokens;
 	}
 	
@@ -58,47 +58,61 @@ public class ConnexionService {
 			//System.out.println("password decoded:"+password);
 			Users user=  userrepo.getByUserNameandPassword(username, password);
 			if(user != null){
-				if(!tokens.containsKey(user.getUsername())){
-					tokens.put(user.getUsername(), generatetoken());
+				if(!tokens.containsKey(user.getId())){
+					tokens.put(user.getId(), generatetoken());
 				}	
 			}
 			return "{ "+"\"id\":\""+user.getId()+"\" ,"+
-						"\"token\":\""+tokens.get(user.getUsername())+"\" }";
+						"\"token\":\""+tokens.get(user.getId())+"\" }";
 		} catch (Exception e) {
 			return "{ \"error\": \"Username ou Mot de passe incorrect\"}";
 		}
 	}
 	@CrossOrigin
 	@RequestMapping(value="/isauth",method = RequestMethod.POST)
-	public String isAuthentified(@RequestParam(value="username") String username,@RequestParam(value="token") String token){		
+	public String isAuthentified(@RequestBody String cred/*@RequestParam(value="username") String username,@RequestParam(value="token") String token*/){		
 		try {
-			Users user=  userrepo.getByUserName(username);
+			JsonParser springParser = JsonParserFactory.getJsonParser();
+			Map<String, Object> result = springParser.parseMap(cred);
+			//obj = new JSONObject(cred);
+			
+			String id = (String)result.get("id");
+			String token = (String)result.get("token");
+			
+			Users user=  userrepo.getOne(new Long(id));
 			
 			if(user != null){
-				if(tokens.get(user.getUsername()).equals(token)){
-					return "{ \"isAuth\":\""+true+"\" }";
+				if(tokens.get(user.getId()).equals(token)){
+					return "{ \"isAuth\":"+true+" }";
 				}
 			}
-			return "{ \"isAuth\":\""+false+"\" }";
+			return "{ \"isAuth\":"+false+" }";
 		} catch (Exception e) {
 			return "{ \"error\":\"Username ou token incorrect\" }";
 		}
 	}
 	@CrossOrigin
-	@RequestMapping(value="/decon",method = RequestMethod.DELETE)
-	public String Deconnecte(@RequestParam(value="username") String username,@RequestParam(value="token") String token){		
-
+	@RequestMapping(value="/decon",method = RequestMethod.POST)
+	public String Deconnecte(@RequestBody String cred/*@RequestParam(value="username") String username,@RequestParam(value="token") String token*/){		
 		try {
-			Users user=  userrepo.getByUserName(username);
+			JsonParser springParser = JsonParserFactory.getJsonParser();
+			Map<String, Object> result = springParser.parseMap(cred);
+			//obj = new JSONObject(cred);
+			
+			String id = (String)result.get("id");
+			String token = (String)result.get("token");
+			
+			Users user=  userrepo.getOne(new Long(id));
+			
 			if(user != null){
-				if(tokens.get(user.getUsername()).equals(token)){
-					tokens.remove(user.getUsername());
-					return "{ \"deconnected\":\""+true+"\" }";
+				if(tokens.get(user.getId()).equals(token)){
+					tokens.remove(user.getId());
+					return "{ \"deconnected\":"+true+" }";
 				}
 			}
-			return "{ \"deconnected\":\""+false+"\" }";
+			return "{ \"deconnected\":"+false+" }";
 		} catch (Exception e) {
-			return "{ \"error\":\"Username ou token incorrect\" }";
+			return "{ \"error\":\"Username non connecté ou token incorrect\" }";
 		}
 	}
 

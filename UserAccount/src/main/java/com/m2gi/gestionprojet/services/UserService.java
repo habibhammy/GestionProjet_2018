@@ -2,8 +2,11 @@ package com.m2gi.gestionprojet.services;
 
 import java.util.Base64;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.json.JsonParser;
+import org.springframework.boot.json.JsonParserFactory;
 import org.springframework.web.bind.annotation.*;
 
 import com.m2gi.gestionprojet.modele.Users;
@@ -39,7 +42,15 @@ public class UserService {
 	 */
 	@CrossOrigin
 	@RequestMapping(value="/add",method = RequestMethod.POST)
-	public Users addUser(@RequestParam(value="username") String username,@RequestParam(value="password") String password){
+	public Users addUser(@RequestBody String cred/*@RequestParam(value="username") String username,@RequestParam(value="password") String password*/){
+		
+		JsonParser springParser = JsonParserFactory.getJsonParser();
+		Map<String, Object> result = springParser.parseMap(cred);
+		//obj = new JSONObject(cred);
+		
+		String username = (String)result.get("username");
+		String password = (String)result.get("password");
+		
 		byte[] valueDecoded = Base64.getDecoder().decode(password.getBytes());
 		password = new String(valueDecoded);		
 		Users user=new Users(username,password);
